@@ -36,8 +36,11 @@ public class Tela extends GameCanvas implements Runnable {
     private Image fundo;
     
     //Mudar Pra lista (ou nem?)
-    private ArrayList<Personagem> personagens;
-
+    //Nem Mudar, a plataforma n suporta
+    private Personagem[] personagens;
+    //Controle Lógico
+    private int qtosPers = 0;
+    
     public static final int DELAY = 40;
 
     public Tela() {
@@ -47,7 +50,8 @@ public class Tela extends GameCanvas implements Runnable {
 
         jogando = false;
         thread = new Thread(this);
-        personagens = new ArrayList<>();
+        //Aumentar o tamanho Max
+        personagens = new Personagem[20];
         try {
             naveAliada = new NaveAliada(Imagens.NAVE_ALIADA);
             inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4);
@@ -73,10 +77,10 @@ public class Tela extends GameCanvas implements Runnable {
         if ( teclaClicada == GameCanvas.LEFT_PRESSED){
             naveAliada.mover(Personagem.ESQUERDA);
         }
-        if ( teclaClicada == GameCanvas.FIRE_PRESSED{
+        if ( teclaClicada == GameCanvas.FIRE_PRESSED){
             Tiro tiro = naveAliada.atirar();
             //E Adiciona na lista de entidades
-            personagens.add(tiro);
+            personagens[qtosPers++] = tiro;
             
         }
 
