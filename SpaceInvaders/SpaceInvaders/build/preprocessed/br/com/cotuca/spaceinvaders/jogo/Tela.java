@@ -70,6 +70,10 @@ public class Tela extends GameCanvas implements Runnable {
         int teclaClicada = getKeyStates();
 
 //        Verificacao de cada acao nessa parte
+<<<<<<< HEAD
+=======
+        //Jão seu Zé Mané! E se eu apertar duas ao mesmo tempo? Ele vai dar break e tratar só a primeira, vou mudar pra if
+>>>>>>> Capone
         if ( teclaClicada == GameCanvas.RIGHT_PRESSED){
             naveAliada.mover(Personagem.DIREITA);
         }
