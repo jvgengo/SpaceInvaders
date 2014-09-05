@@ -6,13 +6,15 @@
 
 package br.com.cotuca.spaceinvaders.personagens;
 
+import java.io.IOException;
+
 /**
  *
  * @author u12176
  */
 public class NaveInimiga extends Nave{
 
-    public NaveInimiga(String src) {
+    public NaveInimiga(String src) throws IOException {
         super(src);
     }
 
