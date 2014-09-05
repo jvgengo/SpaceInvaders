@@ -16,12 +16,11 @@ import javax.microedition.lcdui.game.Sprite;
 public class NaveAliada extends Nave {
 
     public NaveAliada(String src) throws IOException {
-<<<<<<< HEAD
+        super(src);
+
         this.imagem = Image.createImage(src);
         this.sprite = new Sprite(imagem);
-=======
-        super(src);
->>>>>>> Capone
+
     }
 
     public Tiro atirar() {
