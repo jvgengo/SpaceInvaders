@@ -35,8 +35,12 @@ public class Tela extends GameCanvas implements Runnable {
     private NaveAliada naveAliada;
     private Image fundo;
     
+    //Mudar Pra lista (ou nem?)
+    //Nem Mudar, a plataforma n suporta
     private Personagem[] personagens;
-
+    //Controle Lógico
+    private int qtosPers = 0;
+    
     public static final int DELAY = 40;
 
     public Tela() {
@@ -46,6 +50,8 @@ public class Tela extends GameCanvas implements Runnable {
 
         jogando = false;
         thread = new Thread(this);
+        //Aumentar o tamanho Max
+        personagens = new Personagem[20];
         try {
             naveAliada = new NaveAliada(Imagens.NAVE_ALIADA);
             inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4);
@@ -64,16 +70,18 @@ public class Tela extends GameCanvas implements Runnable {
         int teclaClicada = getKeyStates();
 
 //        Verificacao de cada acao nessa parte
-        switch (teclaClicada) {
-            case GameCanvas.RIGHT_PRESSED:
-                naveAliada.mover(Personagem.DIREITA);
-                break;
-            case GameCanvas.LEFT_PRESSED:
-                naveAliada.mover(Personagem.ESQUERDA);
-                break;
-            case GameCanvas.FIRE_PRESSED:
-                Tiro tiro = naveAliada.atirar();
-                break;
+        //Jão seu Zé Mané! E se eu apertar duas ao mesmo tempo? Ele vai dar break e tratar só a primeira, vou mudar pra if
+        if ( teclaClicada == GameCanvas.RIGHT_PRESSED){
+            naveAliada.mover(Personagem.DIREITA);
+        }
+        if ( teclaClicada == GameCanvas.LEFT_PRESSED){
+            naveAliada.mover(Personagem.ESQUERDA);
+        }
+        if ( teclaClicada == GameCanvas.FIRE_PRESSED){
+            Tiro tiro = naveAliada.atirar();
+            //E Adiciona na lista de entidades
+            personagens[qtosPers++] = tiro;
+            
         }
 
     }

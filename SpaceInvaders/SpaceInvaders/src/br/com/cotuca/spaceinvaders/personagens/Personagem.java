@@ -6,7 +6,9 @@
 
 package br.com.cotuca.spaceinvaders.personagens;
 
+import java.io.IOException;
 import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.game.Sprite;
 
 /**
  *
@@ -23,6 +25,10 @@ public abstract class Personagem {
     public static final int ESQUERDA = 1;
     public static final int CIMA = 2;
     public static final int BAIXO = 3;
+
+    public Personagem(String src) throws IOException {
+        this.imagem = Image.createImage(src);
+    }
     
     
     

@@ -10,6 +10,10 @@ package br.com.cotuca.spaceinvaders.personagens;
  *
  * @author u12176
  */
-public class NaveInimiga {
-    
+public class NaveInimiga extends Nave{
+
+    public NaveInimiga(String src) {
+        super(src);
+    }
+
 }

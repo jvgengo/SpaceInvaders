@@ -6,11 +6,17 @@
 
 package br.com.cotuca.spaceinvaders.personagens;
 
+import java.io.IOException;
+
 /**
  *
  * @author u12176
  */
 public class Tiro extends Personagem{
+
+    public Tiro(String src) throws IOException {
+        super(src);
+    }
 
     public void mover(int direcao) {
     }

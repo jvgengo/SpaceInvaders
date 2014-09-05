@@ -15,12 +15,12 @@ import javax.microedition.lcdui.game.Sprite;
 public class Nave extends Personagem{
 
     protected Sprite sprite;
-    
-    public Nave() {
-        x = 0;
-        y = 0;
-        imagem = null;
+
+    public Nave(String src) {
+        super(src);
+        this.sprite = new Sprite(this.imagem, 16, 16);
     }
+
 
     public void mover(int direcao) {
             switch (direcao) {
@@ -32,10 +32,7 @@ public class Nave extends Personagem{
                 break;
         }
     }
-    
-    public Tiro atirar(){
-        return null;
-    }
+   
       
     
 }
