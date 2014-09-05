@@ -22,7 +22,7 @@ public class NaveAliada extends Nave{
     
     public NaveAliada(String src) throws IOException {
         this.imagem = Image.createImage(src);
-        this.sprite = new Sprite(imagem,16,16);
+        this.sprite = new Sprite(imagem);
     }
 
     public Tiro atirar() {
