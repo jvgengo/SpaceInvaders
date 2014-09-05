@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.cotuca.spaceinvaders.personagens;
 
 import java.io.IOException;
@@ -12,15 +11,17 @@ import java.io.IOException;
  *
  * @author u12176
  */
-public class Tiro extends Personagem{
+public class Tiro extends Personagem {
 
     public Tiro(String src) throws IOException {
         super(src);
-    }
+    } 
 
-    public void mover(int direcao) {
+    public boolean mover(int direcao) {
+        if(direcao == Personagem.CIMA){
+            this.y -= 2;
+        }
+        return false;
     }
-    
-
-    
 }
+

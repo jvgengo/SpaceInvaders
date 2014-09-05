@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.cotuca.spaceinvaders.personagens;
 
 import java.io.IOException;
@@ -13,7 +12,7 @@ import javax.microedition.lcdui.game.Sprite;
  *
  * @author u12176
  */
-public class Nave extends Personagem{
+public class Nave extends Personagem {
 
     protected Sprite sprite;
 
@@ -22,18 +21,16 @@ public class Nave extends Personagem{
         this.sprite = new Sprite(this.imagem, 16, 16);
     }
 
-
-    public void mover(int direcao) {
-            switch (direcao) {
+    public boolean mover(int direcao) {
+        switch (direcao) {
             case Personagem.DIREITA:
                 x += 5;
-                break;
+                return true;
             case Personagem.ESQUERDA:
                 x -= 5;
-                break;
+                return true;
         }
+        return false;
     }
-   
-      
-    
+
 }

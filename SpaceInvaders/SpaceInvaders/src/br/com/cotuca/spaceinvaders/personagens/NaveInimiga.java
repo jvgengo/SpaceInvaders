@@ -18,4 +18,17 @@ public class NaveInimiga extends Nave{
         super(src);
     }
 
+    public boolean mover(int direcao) {
+        if(super.mover(direcao)){
+            return true;
+        }
+        if(direcao == Personagem.BAIXO){
+            this.y += 16;
+            return true;
+        }
+        return false;
+    }
+    
+    
+
 }

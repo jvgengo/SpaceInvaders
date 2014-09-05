@@ -32,5 +32,5 @@ public abstract class Personagem {
     
     
     
-    public abstract void mover(int direcao);
+    public abstract boolean mover(int direcao);
 }
