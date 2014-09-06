@@ -15,19 +15,22 @@ import javax.microedition.lcdui.game.Sprite;
 public class Nave extends Personagem {
 
     protected Sprite sprite;
+    protected static final int VELOCIDADE = 3;
 
     public Nave(String src) throws IOException {
         super(src);
-        this.sprite = new Sprite(this.imagem, 16, 16);
+        this.sprite = new Sprite(this.imagem);
     }
 
     public boolean mover(int direcao) {
         switch (direcao) {
             case Personagem.DIREITA:
-                x += 5;
+                this.sprite.move(VELOCIDADE, 0);
+                //sprite.nextFrame();
                 return true;
             case Personagem.ESQUERDA:
-                x -= 5;
+                this.sprite.move(-VELOCIDADE, 0);
+                //sprite.nextFrame();
                 return true;
         }
         return false;

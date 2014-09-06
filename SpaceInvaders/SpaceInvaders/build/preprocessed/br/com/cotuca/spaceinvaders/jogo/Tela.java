@@ -53,16 +53,15 @@ public class Tela extends GameCanvas implements Runnable {
         //Aumentar o tamanho Max
         personagens = new Personagem[20];
         try {
-            naveAliada = new NaveAliada("/Koala.jpg");
-            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4);
-            fundo = Image.createImage(Imagens.FUNDO);
+            naveAliada = new NaveAliada(Imagens.NAVE_ALIADA);
+           // inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4);
+           // fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
         lmng = new LayerManager();
         lmng.insert(naveAliada.getSprite(),0);
-
     }
 
     private void acoesDoTeclado(Graphics g) {
@@ -70,10 +69,6 @@ public class Tela extends GameCanvas implements Runnable {
         int teclaClicada = getKeyStates();
 
 //        Verificacao de cada acao nessa parte
-<<<<<<< HEAD
-=======
-        //Jão seu Zé Mané! E se eu apertar duas ao mesmo tempo? Ele vai dar break e tratar só a primeira, vou mudar pra if
->>>>>>> Capone
         if ( teclaClicada == GameCanvas.RIGHT_PRESSED){
             naveAliada.mover(Personagem.DIREITA);
         }
@@ -90,7 +85,7 @@ public class Tela extends GameCanvas implements Runnable {
     }
 
     private void desenhar(Graphics g) {
-       g.drawImage(fundo, 0, 0,0);
+      // g.drawImage(fundo, 0, 0,0);
        lmng.paint(g,0, 0);
        flushGraphics();
     }

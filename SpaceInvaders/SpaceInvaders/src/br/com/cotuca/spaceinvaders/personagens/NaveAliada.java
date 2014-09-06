@@ -6,7 +6,6 @@
 package br.com.cotuca.spaceinvaders.personagens;
 
 import java.io.IOException;
-import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 
 /**
@@ -17,10 +16,6 @@ public class NaveAliada extends Nave {
 
     public NaveAliada(String src) throws IOException {
         super(src);
-
-        this.imagem = Image.createImage(src);
-        this.sprite = new Sprite(imagem);
-
     }
 
     public Tiro atirar() {

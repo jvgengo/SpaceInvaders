@@ -12,7 +12,7 @@ package br.com.cotuca.spaceinvaders.Recursos;
  */
 public class Imagens {
     
-    public static final String NAVE_ALIADA = "/Koala.jpg";
-    public static final String NAVE_INIMIGA = "/Koala.jpg";
-    public static final String FUNDO = "/Koala.jpg";
+    public static final String NAVE_ALIADA = "res/nave.jpg";
+    public static final String NAVE_INIMIGA = "res/Koala.jpg";
+    public static final String FUNDO = "res/Koala.jpg";
 }

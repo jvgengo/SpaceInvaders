@@ -8,7 +8,6 @@ package br.com.cotuca.spaceinvaders.personagens;
 
 import java.io.IOException;
 import javax.microedition.lcdui.Image;
-import javax.microedition.lcdui.game.Sprite;
 
 /**
  *
@@ -29,8 +28,6 @@ public abstract class Personagem {
     public Personagem(String src) throws IOException {
         this.imagem = Image.createImage(src);
     }
-    
-    
-    
+  
     public abstract boolean mover(int direcao);
 }
