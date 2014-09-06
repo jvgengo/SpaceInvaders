@@ -138,6 +138,7 @@ public class Tela extends GameCanvas implements Runnable {
             inimigos.moverMatriz(Personagem.BAIXO);
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
+              
                 // verificar limite da tela, caso o tiro passe excluir esse tiro
                 int yTiro = tAtual.getTiro().getY();
 

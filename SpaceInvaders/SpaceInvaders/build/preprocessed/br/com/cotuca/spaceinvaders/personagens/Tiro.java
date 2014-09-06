@@ -27,6 +27,7 @@ public class Tiro extends Personagem {
     public boolean mover(int direcao) {
         if(direcao == Personagem.CIMA){
             tiro.move(0, -VELOCIADADE);
+            tiro.nextFrame();
             return true;
         }
         return false;
