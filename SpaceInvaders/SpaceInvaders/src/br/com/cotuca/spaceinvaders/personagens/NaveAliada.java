@@ -6,7 +6,6 @@
 package br.com.cotuca.spaceinvaders.personagens;
 
 import java.io.IOException;
-import javax.microedition.lcdui.game.Sprite;
 
 /**
  *
@@ -22,7 +21,4 @@ public class NaveAliada extends Nave {
         return null;
     }
 
-    public Sprite getSprite() {
-        return sprite;
-    }
 }

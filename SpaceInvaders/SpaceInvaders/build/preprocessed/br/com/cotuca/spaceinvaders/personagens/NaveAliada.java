@@ -22,7 +22,5 @@ public class NaveAliada extends Nave {
         return null;
     }
 
-    public Sprite getSprite() {
-        return sprite;
-    }
+  
 }

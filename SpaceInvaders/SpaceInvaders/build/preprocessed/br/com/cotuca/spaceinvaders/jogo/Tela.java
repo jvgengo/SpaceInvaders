@@ -6,10 +6,7 @@
 package br.com.cotuca.spaceinvaders.jogo;
 
 import br.com.cotuca.spaceinvaders.Recursos.Imagens;
-import br.com.cotuca.spaceinvaders.personagens.Inimigos;
-import br.com.cotuca.spaceinvaders.personagens.NaveAliada;
-import br.com.cotuca.spaceinvaders.personagens.Personagem;
-import br.com.cotuca.spaceinvaders.personagens.Tiro;
+import br.com.cotuca.spaceinvaders.personagens.*;
 import java.io.IOException;
 import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.lcdui.*;
@@ -54,7 +51,7 @@ public class Tela extends GameCanvas implements Runnable {
         personagens = new Personagem[20];
         try {
             naveAliada = new NaveAliada(Imagens.NAVE_ALIADA);
-           // inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4);
+            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4);
            // fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -62,6 +59,18 @@ public class Tela extends GameCanvas implements Runnable {
 
         lmng = new LayerManager();
         lmng.insert(naveAliada.getSprite(),0);
+        
+        
+        //capone n tenho certeza se eh a melhor forma de ser feito isso
+        //preciso add cada nave no lmng
+        NaveInimiga[][] navesInimigas = inimigos.getInimigos();
+        
+        for (int i = 0; i < inimigos.getLinhas(); i++) {
+            for (int j = 0; j < inimigos.getColunas(); j++) {
+                lmng.insert(navesInimigas[i][j].getSprite(), i);
+            }
+        }
+        
     }
 
     private void acoesDoTeclado(Graphics g) {
@@ -103,8 +112,9 @@ public class Tela extends GameCanvas implements Runnable {
         Graphics g = getGraphics();
 
         while (jogando) {
-
+            
             acoesDoTeclado(g);
+            inimigos.moverMatriz(Personagem.BAIXO);
             desenhar(g);
 
             try {

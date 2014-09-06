@@ -35,5 +35,9 @@ public class Nave extends Personagem {
         }
         return false;
     }
+    
+    public Sprite getSprite() {
+        return sprite;
+    }
 
 }
