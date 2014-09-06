@@ -5,6 +5,7 @@
  */
 package br.com.cotuca.spaceinvaders.personagens;
 
+import br.com.cotuca.spaceinvaders.Recursos.Imagens;
 import java.io.IOException;
 
 /**
@@ -17,8 +18,11 @@ public class NaveAliada extends Nave {
         super(src,x,y);
     }
 
-    public Tiro atirar() {
-        return null;
+    public Tiro atirar() throws IOException {
+        
+        Tiro tiro = new Tiro(Imagens.TIRO, getSprite().getX(), getSprite().getY() - this.imagem.getHeight() - 20);
+        
+        return tiro;
     }
 
 }

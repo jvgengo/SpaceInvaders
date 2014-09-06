@@ -6,6 +6,7 @@
 package br.com.cotuca.spaceinvaders.personagens;
 
 import java.io.IOException;
+import javax.microedition.lcdui.game.Sprite;
 
 /**
  *
@@ -13,15 +14,28 @@ import java.io.IOException;
  */
 public class Tiro extends Personagem {
 
-    public Tiro(String src) throws IOException {
-        super(src);
+    private Sprite tiro;
+    public static final int VELOCIADADE = 4;
+    
+    
+    public Tiro(String src,int x,int y) throws IOException {
+        super(src,x,y);
+        this.tiro = new Sprite(this.imagem, this.imagem.getWidth()/3, this.imagem.getHeight());
+        this.tiro.setPosition(x, y);
     } 
 
     public boolean mover(int direcao) {
         if(direcao == Personagem.CIMA){
-            this.y -= 2;
+            tiro.move(0, -VELOCIADADE);
+            return true;
         }
         return false;
     }
+
+    public Sprite getTiro() {
+        return tiro;
+    }
+    
+    
 }
 

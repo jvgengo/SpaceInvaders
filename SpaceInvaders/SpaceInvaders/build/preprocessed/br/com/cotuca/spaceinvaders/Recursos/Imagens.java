@@ -15,4 +15,5 @@ public class Imagens {
     public static final String NAVE_ALIADA = "res/images.jpg";
     public static final String NAVE_INIMIGA = "res/images.jpg";
     public static final String FUNDO = "res/Koala.jpg";
+    public static final String TIRO = "res/images.jpg";
 }
