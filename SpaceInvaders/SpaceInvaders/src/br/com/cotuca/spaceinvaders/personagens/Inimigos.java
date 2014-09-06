@@ -20,7 +20,7 @@ public class Inimigos {
     protected int colunas;
     protected int linhas;
     
-    public Inimigos(String srcImagem, int colunas, int linhas) {
+    public Inimigos(String srcImagem, int colunas, int linhas,int x, int y) {
         inimigos = new NaveInimiga[linhas][colunas];
         this.colunas = colunas;
         this.linhas = linhas;
@@ -28,7 +28,8 @@ public class Inimigos {
         for (int l = 0; l < linhas; l++){
             for(int c =0; c < colunas; c++){
                 try {
-                    inimigos[l][c] = new NaveInimiga(srcImagem);
+                    //arrumar posicao dos inimigos que esta errado ainda
+                    inimigos[l][c] = new NaveInimiga(srcImagem,l+x,c+y);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                     break;

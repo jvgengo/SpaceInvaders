@@ -50,8 +50,8 @@ public class Tela extends GameCanvas implements Runnable {
         //Aumentar o tamanho Max
         personagens = new Personagem[20];
         try {
-            naveAliada = new NaveAliada(Imagens.NAVE_ALIADA);
-            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4);
+            naveAliada = new NaveAliada(Imagens.NAVE_ALIADA,largura/2,altura - 60);
+            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4,0,0);
             fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();

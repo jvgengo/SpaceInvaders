@@ -13,8 +13,8 @@ import java.io.IOException;
  */
 public class NaveAliada extends Nave {
 
-    public NaveAliada(String src) throws IOException {
-        super(src);
+    public NaveAliada(String src, int x, int y) throws IOException {
+        super(src,x,y);
     }
 
     public Tiro atirar() {

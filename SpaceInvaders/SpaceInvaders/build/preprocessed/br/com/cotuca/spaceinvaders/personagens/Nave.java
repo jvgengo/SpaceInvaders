@@ -15,13 +15,15 @@ import javax.microedition.lcdui.game.Sprite;
 public class Nave extends Personagem {
 
     protected Sprite sprite;
-    protected static final int VELOCIDADE = 3;
+    protected static final int VELOCIDADE = 5;
 
-    public Nave(String src) throws IOException {
+    public Nave(String src, int x,int y) throws IOException {
         super(src);
-        
+       
         //arrumar a dimnesao dos sprites, ta uma bosta pq n temos os sprites certos ainda
         this.sprite = new Sprite(this.imagem,this.imagem.getWidth()/3,this.imagem.getHeight());
+        this.sprite.setPosition(x, y);
+
     }
 
     public boolean mover(int direcao) {
