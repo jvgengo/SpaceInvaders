@@ -52,7 +52,7 @@ public class Tela extends GameCanvas implements Runnable {
         try {
             naveAliada = new NaveAliada(Imagens.NAVE_ALIADA);
             inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4);
-           // fundo = Image.createImage(Imagens.FUNDO);
+            fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -94,7 +94,7 @@ public class Tela extends GameCanvas implements Runnable {
     }
 
     private void desenhar(Graphics g) {
-      // g.drawImage(fundo, 0, 0,0);
+       g.drawImage(fundo, 0, 0,0);
        lmng.paint(g,0, 0);
        flushGraphics();
     }

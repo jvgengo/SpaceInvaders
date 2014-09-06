@@ -49,8 +49,8 @@ public class Inimigos {
     public boolean moverMatriz(int direcao){
         for (int l = 0; l < inimigos.length; l++){
             for(int c =0; c < inimigos[0].length; c++){
-               // inimigos[l][c].mover(dir);
-                inimigos[l][c].mover(direcao);
+                inimigos[l][c].mover(dir);
+               // inimigos[l][c].mover(direcao);
             }
         }
         return true;

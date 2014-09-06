@@ -19,17 +19,21 @@ public class Nave extends Personagem {
 
     public Nave(String src) throws IOException {
         super(src);
-        this.sprite = new Sprite(this.imagem);
+        
+        //arrumar a dimnesao dos sprites, ta uma bosta pq n temos os sprites certos ainda
+        this.sprite = new Sprite(this.imagem,this.imagem.getWidth()/3,this.imagem.getHeight());
     }
 
     public boolean mover(int direcao) {
         switch (direcao) {
             case Personagem.DIREITA:
                 this.sprite.move(VELOCIDADE, 0);
+                this.sprite.nextFrame();
                 //sprite.nextFrame();
                 return true;
             case Personagem.ESQUERDA:
                 this.sprite.move(-VELOCIDADE, 0);
+                this.sprite.nextFrame();
                 //sprite.nextFrame();
                 return true;
         }
