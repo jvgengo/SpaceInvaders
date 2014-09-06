@@ -46,7 +46,7 @@ public class Tela extends GameCanvas implements Runnable {
         thread = new Thread(this);
         //Aumentar o tamanho Max
         personagens = new Personagem[20];
-        tiros = new Tiro[5];
+        tiros = new Tiro[3];
         try {
             naveAliada = new NaveAliada(Imagens.NAVE_ALIADA, largura / 2, altura - 60);
             inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4, 0, 0);
@@ -80,7 +80,7 @@ public class Tela extends GameCanvas implements Runnable {
 //        Verificacao de cada acao nessa parte
         if (teclaClicada == GameCanvas.RIGHT_PRESSED) {
             //limite da tela de x ==> 0 ==> largura
-            if (xNave < largura-naveAliada.getSprite().getWidth()) {
+            if (xNave < largura - naveAliada.getSprite().getWidth()) {
                 naveAliada.mover(Personagem.DIREITA);
             }
         }
@@ -93,7 +93,7 @@ public class Tela extends GameCanvas implements Runnable {
             Tiro tiro = null;
 
             //verificar o limite de tiros na tela
-            if (qtosTiros < 5) {
+            if (qtosTiros < 3) {
 
                 try {
                     tiro = naveAliada.atirar();
@@ -101,7 +101,8 @@ public class Tela extends GameCanvas implements Runnable {
                     ex.printStackTrace();
                 }
                 lmng.insert(tiro.getTiro(), iLm);
-                tiros[qtosTiros++] = tiro;
+                tiros[qtosTiros] = tiro;
+                qtosTiros++;
 
                 //E Adiciona na lista de entidades
 
@@ -137,7 +138,14 @@ public class Tela extends GameCanvas implements Runnable {
             inimigos.moverMatriz(Personagem.BAIXO);
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
-                tAtual.mover(Personagem.CIMA);
+                // verificar limite da tela, caso o tiro passe excluir esse tiro
+                int yTiro = tAtual.getTiro().getY();
+
+                if (yTiro >= 0) {
+                    tAtual.mover(Personagem.CIMA);
+                } else {
+                    removerTiro(tAtual, i);
+                }
             }
             desenhar(g);
 
@@ -148,5 +156,15 @@ public class Tela extends GameCanvas implements Runnable {
             }
 
         }
+    }
+
+    private void removerTiro(Tiro tiro, int i) {
+        for (int j = i; j < qtosTiros; j++) {
+            if (j < qtosTiros-1) {
+                tiros[j] = tiros[j + 1];
+            }
+        }
+        qtosTiros--;
+        lmng.remove(tiro.getTiro());
     }
 }
