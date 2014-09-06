@@ -18,7 +18,7 @@ public class Nave extends Personagem {
     protected static final int VELOCIDADE = 5;
 
     public Nave(String src, int x,int y) throws IOException {
-        super(src);
+        super(src,x,y);
        
         //arrumar a dimnesao dos sprites, ta uma bosta pq n temos os sprites certos ainda
         this.sprite = new Sprite(this.imagem,this.imagem.getWidth()/3,this.imagem.getHeight());
@@ -31,12 +31,10 @@ public class Nave extends Personagem {
             case Personagem.DIREITA:
                 this.sprite.move(VELOCIDADE, 0);
                 this.sprite.nextFrame();
-                //sprite.nextFrame();
                 return true;
             case Personagem.ESQUERDA:
                 this.sprite.move(-VELOCIDADE, 0);
                 this.sprite.nextFrame();
-                //sprite.nextFrame();
                 return true;
         }
         return false;

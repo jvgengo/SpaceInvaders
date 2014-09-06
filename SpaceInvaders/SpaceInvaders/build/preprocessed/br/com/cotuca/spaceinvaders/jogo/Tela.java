@@ -75,13 +75,19 @@ public class Tela extends GameCanvas implements Runnable {
     private void acoesDoTeclado(Graphics g) {
 
         int teclaClicada = getKeyStates();
+        int xNave = naveAliada.getSprite().getX();
 
 //        Verificacao de cada acao nessa parte
         if (teclaClicada == GameCanvas.RIGHT_PRESSED) {
-            naveAliada.mover(Personagem.DIREITA);
+            //limite da tela de x ==> 0 ==> largura
+            if (xNave < largura-naveAliada.getSprite().getWidth()) {
+                naveAliada.mover(Personagem.DIREITA);
+            }
         }
         if (teclaClicada == GameCanvas.LEFT_PRESSED) {
-            naveAliada.mover(Personagem.ESQUERDA);
+            if (xNave > 0) {
+                naveAliada.mover(Personagem.ESQUERDA);
+            }
         }
         if (teclaClicada == GameCanvas.UP_PRESSED) {
             Tiro tiro = null;
@@ -96,7 +102,7 @@ public class Tela extends GameCanvas implements Runnable {
                 }
                 lmng.insert(tiro.getTiro(), iLm);
                 tiros[qtosTiros++] = tiro;
-                               
+
                 //E Adiciona na lista de entidades
 
                 //Capone vou criar uma lista de tiros, mas depois conversamos sobre essa lista de personagens
@@ -129,9 +135,9 @@ public class Tela extends GameCanvas implements Runnable {
 
             acoesDoTeclado(g);
             inimigos.moverMatriz(Personagem.BAIXO);
-            for (int i = 0 ; i < qtosTiros; i++) {
-               Tiro tAtual = tiros[i];
-               tAtual.mover(Personagem.CIMA);
+            for (int i = 0; i < qtosTiros; i++) {
+                Tiro tAtual = tiros[i];
+                tAtual.mover(Personagem.CIMA);
             }
             desenhar(g);
 

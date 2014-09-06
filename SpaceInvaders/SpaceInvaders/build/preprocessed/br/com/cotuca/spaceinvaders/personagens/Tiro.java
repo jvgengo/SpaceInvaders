@@ -15,7 +15,7 @@ import javax.microedition.lcdui.game.Sprite;
 public class Tiro extends Personagem {
 
     private Sprite tiro;
-    public static final int VELOCIADADE = 2;
+    public static final int VELOCIADADE = 4;
     
     
     public Tiro(String src,int x,int y) throws IOException {
