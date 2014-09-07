@@ -22,6 +22,7 @@ public class NaveAliada extends Nave {
         
         Tiro tiro = new Tiro(Imagens.TIRO, getSprite().getX(), getSprite().getY() - this.imagem.getHeight() - 20);
         
+        
         return tiro;
     }
 
