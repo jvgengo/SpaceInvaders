@@ -53,7 +53,7 @@ public class Tela extends GameCanvas implements Runnable {
         tiros = new Tiro[3];
         try {
             naveAliada = new NaveAliada(Imagens.NAVE_ALIADA, largura / 2, altura - 60);
-            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 0, 0);
+            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8,4, 0, 0);
             fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -138,7 +138,8 @@ public class Tela extends GameCanvas implements Runnable {
         while (jogando) {
 
             acoesDoTeclado(g);
-            inimigos.moverMatriz(Personagem.BAIXO);
+            
+            inimigos.mover(altura,largura);
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
                 
@@ -166,6 +167,20 @@ public class Tela extends GameCanvas implements Runnable {
                     removerTiro(tAtual, i);
                 }
             }
+            
+            //verificar colisao com naveInimiga/naveAliada
+            for (int i = 0; i < qtosInimigos; i++) {
+                NaveInimiga nAtual = nInimigas[i];
+                
+                Sprite n = nAtual.getSprite();
+                Sprite aliada = naveAliada.getSprite();
+                
+                if (n.collidesWith(aliada, true)) {
+                    //acabou o jogo
+                    pararJogo();
+                }
+            }
+            
             desenhar(g);
 
             try {
