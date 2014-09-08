@@ -20,6 +20,8 @@ public class SpaceInvaders extends MIDlet implements CommandListener{
     private Display display;
     private Command cmdExit;
     private Tela coreGame;
+    public static final int lSprite = 16;
+    public static final int aSprite = 8;
     
     SpaceInvaders(){
         display = Display.getDisplay(this);

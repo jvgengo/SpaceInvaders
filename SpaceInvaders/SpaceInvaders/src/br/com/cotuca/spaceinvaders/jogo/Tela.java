@@ -45,7 +45,7 @@ public class Tela extends GameCanvas implements Runnable {
         super(true);
         altura = getHeight();
         largura = getWidth();
-
+        
         jogando = false;
         thread = new Thread(this);
         //Aumentar o tamanho Max
@@ -139,7 +139,7 @@ public class Tela extends GameCanvas implements Runnable {
 
             acoesDoTeclado(g);
             
-            inimigos.mover(altura,largura);
+            inimigos.moverMatriz(this);
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
                 
