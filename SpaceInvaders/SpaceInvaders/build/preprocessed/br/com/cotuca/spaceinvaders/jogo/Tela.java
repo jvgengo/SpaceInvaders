@@ -8,9 +8,11 @@ package br.com.cotuca.spaceinvaders.jogo;
 import br.com.cotuca.spaceinvaders.Recursos.Imagens;
 import br.com.cotuca.spaceinvaders.personagens.*;
 import java.io.IOException;
+import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
-import javax.microedition.lcdui.*;
 import javax.microedition.lcdui.game.LayerManager;
+import javax.microedition.lcdui.game.Sprite;
 
 /**
  *
@@ -30,9 +32,11 @@ public class Tela extends GameCanvas implements Runnable {
     private Image fundo;
     private Personagem[] personagens;
     private Tiro[] tiros;
+    private NaveInimiga[] nInimigas;
     //Controle Lógico
     private int qtosPers = 0;
     private int qtosTiros = 0;
+    private int qtosInimigos = 0;
     public static final int DELAY = 40;
     //indice do LayerManger
     private int iLm = 0;
@@ -49,7 +53,7 @@ public class Tela extends GameCanvas implements Runnable {
         tiros = new Tiro[3];
         try {
             naveAliada = new NaveAliada(Imagens.NAVE_ALIADA, largura / 2, altura - 60);
-            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8, 4, 0, 0);
+            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8,4, 0, 0);
             fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -61,13 +65,12 @@ public class Tela extends GameCanvas implements Runnable {
 
         //capone n tenho certeza se eh a melhor forma de ser feito isso
         //preciso add cada nave no lmng
-        NaveInimiga[][] navesInimigas = inimigos.getInimigos();
+        nInimigas = inimigos.getInimigos();
+        qtosInimigos = nInimigas.length;
 
         for (int i = 0; i < inimigos.getLinhas(); i++) {
-            for (int j = 0; j < inimigos.getColunas(); j++) {
-                iLm += 1;
-                lmng.insert(navesInimigas[i][j].getSprite(), iLm);
-            }
+            iLm += 1;
+            lmng.insert(nInimigas[i].getSprite(), iLm);
         }
 
     }
@@ -135,10 +138,26 @@ public class Tela extends GameCanvas implements Runnable {
         while (jogando) {
 
             acoesDoTeclado(g);
-            inimigos.moverMatriz(Personagem.BAIXO);
+            
+            inimigos.mover(altura,largura);
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
-              
+                
+                //for para verificar colisao com os inimigos
+                for (int j = 0; j < qtosInimigos; j++) {
+                    NaveInimiga nAtual = nInimigas[j];
+                    
+                    Sprite t = tAtual.getTiro();
+                    Sprite n = nAtual.getSprite();
+                    
+                    //verifica colisao
+                    if (t.collidesWith(n, true)) {
+                        removerInimigo(nAtual, j);
+                        removerTiro(tAtual, i);
+                    }
+                    
+                }
+                
                 // verificar limite da tela, caso o tiro passe excluir esse tiro
                 int yTiro = tAtual.getTiro().getY();
 
@@ -148,6 +167,20 @@ public class Tela extends GameCanvas implements Runnable {
                     removerTiro(tAtual, i);
                 }
             }
+            
+            //verificar colisao com naveInimiga/naveAliada
+            for (int i = 0; i < qtosInimigos; i++) {
+                NaveInimiga nAtual = nInimigas[i];
+                
+                Sprite n = nAtual.getSprite();
+                Sprite aliada = naveAliada.getSprite();
+                
+                if (n.collidesWith(aliada, true)) {
+                    //acabou o jogo
+                    pararJogo();
+                }
+            }
+            
             desenhar(g);
 
             try {
@@ -160,12 +193,18 @@ public class Tela extends GameCanvas implements Runnable {
     }
 
     private void removerTiro(Tiro tiro, int i) {
-        for (int j = i; j < qtosTiros; j++) {
-            if (j < qtosTiros-1) {
-                tiros[j] = tiros[j + 1];
-            }
+        for (int j = i; j < qtosTiros - 1; j++) {
+            tiros[j] = tiros[j + 1];
         }
         qtosTiros--;
         lmng.remove(tiro.getTiro());
+    }
+
+    private void removerInimigo(NaveInimiga nave, int i) {
+        for (int j = i; j < qtosInimigos - 1; j++) {
+            nInimigas[j] = nInimigas[j + 1];
+        }
+        qtosInimigos--;
+        lmng.remove(nave.getSprite());
     }
 }

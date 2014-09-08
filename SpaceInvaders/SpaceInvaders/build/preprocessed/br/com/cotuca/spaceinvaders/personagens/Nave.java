@@ -16,12 +16,14 @@ public class Nave extends Personagem {
 
     protected Sprite sprite;
     protected static final int VELOCIDADE = 5;
-
-    public Nave(String src, int x,int y) throws IOException {
+    protected int divisor = 1; //variavel que dividi o sprite
+    
+    
+    public Nave(String src, int x,int y, int div) throws IOException {
         super(src,x,y);
-       
+        divisor = div;
         //arrumar a dimnesao dos sprites, ta uma bosta pq n temos os sprites certos ainda
-        this.sprite = new Sprite(this.imagem,this.imagem.getWidth()/3,this.imagem.getHeight());
+        this.sprite = new Sprite(this.imagem,this.imagem.getWidth()/divisor,this.imagem.getHeight());
         this.sprite.setPosition(x, y);
 
     }
