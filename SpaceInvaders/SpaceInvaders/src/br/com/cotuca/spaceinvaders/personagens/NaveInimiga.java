@@ -17,7 +17,7 @@ public class NaveInimiga extends Nave{
     protected static final int VELOCIADADE_BAIXO = 1;
     
     public NaveInimiga(String src,int x,int y) throws IOException {
-        super(src,x,y);
+        super(src,x,y,2);
     }
 
     public boolean mover(int direcao) {

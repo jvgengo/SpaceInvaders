@@ -20,7 +20,7 @@ public class Tiro extends Personagem {
     
     public Tiro(String src,int x,int y) throws IOException {
         super(src,x,y);
-        this.tiro = new Sprite(this.imagem, this.imagem.getWidth()/3, this.imagem.getHeight());
+        this.tiro = new Sprite(this.imagem, this.imagem.getWidth()/8, this.imagem.getHeight());
         this.tiro.setPosition(x, y);
     } 
 
