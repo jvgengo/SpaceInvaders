@@ -15,7 +15,7 @@ import javax.microedition.lcdui.game.Sprite;
 public class Nave extends Personagem {
 
     protected Sprite sprite;
-    protected static final int VELOCIDADE = 5;
+    protected static final int VELOCIDADE = 3;
     protected int divisor = 1; //variavel que dividi o sprite
     
     

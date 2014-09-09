@@ -52,8 +52,9 @@ public class Tela extends GameCanvas implements Runnable {
         personagens = new Personagem[20];
         tiros = new Tiro[3];
         try {
-            naveAliada = new NaveAliada(Imagens.NAVE_ALIADA, largura / 2, altura - 60);
-            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8,4, 0, 0);
+            naveAliada = new NaveAliada(Imagens.NAVE_ALIADA, largura - 30, altura - 60);
+            
+            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8,1, 0, 0);
             fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -63,12 +64,11 @@ public class Tela extends GameCanvas implements Runnable {
         lmng.insert(naveAliada.getSprite(), iLm);
 
 
-        //capone n tenho certeza se eh a melhor forma de ser feito isso
         //preciso add cada nave no lmng
         nInimigas = inimigos.getInimigos();
         qtosInimigos = nInimigas.length;
 
-        for (int i = 0; i < inimigos.getLinhas(); i++) {
+        for (int i = 0; i < qtosInimigos; i++) {
             iLm += 1;
             lmng.insert(nInimigas[i].getSprite(), iLm);
         }
@@ -103,14 +103,11 @@ public class Tela extends GameCanvas implements Runnable {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+
                 lmng.insert(tiro.getTiro(), iLm);
                 tiros[qtosTiros] = tiro;
                 qtosTiros++;
 
-                //E Adiciona na lista de entidades
-
-                //Capone vou criar uma lista de tiros, mas depois conversamos sobre essa lista de personagens
-                //personagens[qtosPers++] = tiro;
             }
 
         }
@@ -139,11 +136,9 @@ public class Tela extends GameCanvas implements Runnable {
 
             acoesDoTeclado(g);
             
-<<<<<<< HEAD
-            inimigos.mover(altura,largura);
-=======
-            //inimigos.moverMatriz(this);
->>>>>>> vgcapone
+            
+            //Acho que nao eh no movimento que esta o erro
+            inimigos.moverMatriz(this);
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
                 
@@ -155,9 +150,13 @@ public class Tela extends GameCanvas implements Runnable {
                     Sprite n = nAtual.getSprite();
                     
                     //verifica colisao
+                    
+                    //erro na colisao se o tiro atingir mais de um inimigo ao mesmo tempo
                     if (t.collidesWith(n, true)) {
                         removerInimigo(nAtual, j);
                         removerTiro(tAtual, i);
+                    } else {
+                        
                     }
                     
                 }
@@ -175,11 +174,7 @@ public class Tela extends GameCanvas implements Runnable {
             //verificar colisao com naveInimiga/naveAliada
             for (int i = 0; i < qtosInimigos; i++) {
                 NaveInimiga nAtual = nInimigas[i];
-<<<<<<< HEAD
-                
-=======
                 //System.out.println(i);
->>>>>>> vgcapone
                 Sprite n = nAtual.getSprite();
                 Sprite aliada = naveAliada.getSprite();
                 

@@ -30,12 +30,19 @@ public class Inimigos {
         this.linhas = linhas;
         this.x = x;
         this.y = y;
+        int step = 0;
         for (int l = 0; l < linhas * colunas; l++) {
             try {
                 //arrumar posicao dos inimigos que esta errado ainda
                 System.out.println("Instancia" + (l));
-                inimigos[l] = new NaveInimiga(srcImagem, ((l % colunas) * SpaceInvaders.lSprite) + x,
-                        (l * SpaceInvaders.aSprite) + y);
+                
+                //Capone o erro acho que esta na criacao das posicoes
+                //Teste com um cara apenas na 10 10 e ta funcionando normal
+                
+//                inimigos[l] = new NaveInimiga(srcImagem, ((l % colunas) * SpaceInvaders.lSprite) + x,
+//                        (l * SpaceInvaders.aSprite) + y);
+                inimigos[l] = new NaveInimiga(srcImagem,step + SpaceInvaders.lSprite , SpaceInvaders.aSprite);
+                step += 20;
             } catch (IOException ex) {
                 ex.printStackTrace();
                 break;
