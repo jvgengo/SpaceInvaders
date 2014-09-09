@@ -15,11 +15,21 @@ import java.io.IOException;
 public class NaveInimiga extends Nave{
 
     protected static final int VELOCIDADE_BAIXO = 1;
+    private boolean visivel;
     
     public NaveInimiga(String src,int x,int y) throws IOException {
         super(src,x,y,2);
+        visivel = true;
     }
-
+    
+    public boolean isVisivel(){
+        return visivel;
+    }
+    
+    public void setVisivel(boolean visivel) {
+        this.visivel = visivel;
+    }
+    
     public boolean mover(int direcao) {
         if(super.mover(direcao)){
             return true;

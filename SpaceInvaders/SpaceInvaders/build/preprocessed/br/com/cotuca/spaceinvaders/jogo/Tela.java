@@ -153,7 +153,9 @@ public class Tela extends GameCanvas implements Runnable {
                     
                     //erro na colisao se o tiro atingir mais de um inimigo ao mesmo tempo
                     if (t.collidesWith(n, true)) {
-                        removerInimigo(nAtual, j);
+//                        removerInimigo(nAtual, j);
+                        nAtual.setVisivel(false);
+                        lmng.remove(nAtual.getSprite());
                         removerTiro(tAtual, i);
                     } else {
                         
