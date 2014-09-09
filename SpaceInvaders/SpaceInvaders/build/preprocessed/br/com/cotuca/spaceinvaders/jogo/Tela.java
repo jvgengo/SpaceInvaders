@@ -139,7 +139,7 @@ public class Tela extends GameCanvas implements Runnable {
 
             acoesDoTeclado(g);
             
-            inimigos.moverMatriz(this);
+            //inimigos.moverMatriz(this);
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
                 

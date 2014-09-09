@@ -139,7 +139,9 @@ public class Tela extends GameCanvas implements Runnable {
 
             acoesDoTeclado(g);
             
-            inimigos.moverMatriz(this);
+            
+            //Acho que nao eh no movimento que esta o erro
+            //inimigos.moverMatriz(this);
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
                 
