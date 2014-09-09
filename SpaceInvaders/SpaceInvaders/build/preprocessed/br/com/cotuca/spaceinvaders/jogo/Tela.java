@@ -171,7 +171,7 @@ public class Tela extends GameCanvas implements Runnable {
             //verificar colisao com naveInimiga/naveAliada
             for (int i = 0; i < qtosInimigos; i++) {
                 NaveInimiga nAtual = nInimigas[i];
-                
+                //System.out.println(i);
                 Sprite n = nAtual.getSprite();
                 Sprite aliada = naveAliada.getSprite();
                 
