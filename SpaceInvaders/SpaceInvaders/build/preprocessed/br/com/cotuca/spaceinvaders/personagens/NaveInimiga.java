@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class NaveInimiga extends Nave{
 
-    protected static final int VELOCIADADE_BAIXO = 1;
+    protected static final int VELOCIDADE_BAIXO = 1;
     
     public NaveInimiga(String src,int x,int y) throws IOException {
         super(src,x,y,2);
@@ -25,7 +25,8 @@ public class NaveInimiga extends Nave{
             return true;
         }
         if(direcao == Personagem.BAIXO){
-            this.sprite.move(0, VELOCIADADE_BAIXO);
+            this.sprite.move(0, VELOCIDADE_BAIXO);
+            this.y += VELOCIDADE_BAIXO;
             return true;
         }
         return false;

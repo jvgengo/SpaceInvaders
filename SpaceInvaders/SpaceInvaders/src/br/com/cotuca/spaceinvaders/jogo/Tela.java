@@ -45,7 +45,7 @@ public class Tela extends GameCanvas implements Runnable {
         super(true);
         altura = getHeight();
         largura = getWidth();
-
+        
         jogando = false;
         thread = new Thread(this);
         //Aumentar o tamanho Max
@@ -139,7 +139,9 @@ public class Tela extends GameCanvas implements Runnable {
 
             acoesDoTeclado(g);
             
-            inimigos.mover(altura,largura);
+            
+            //Acho que nao eh no movimento que esta o erro
+            //inimigos.moverMatriz(this);
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
                 
@@ -171,7 +173,7 @@ public class Tela extends GameCanvas implements Runnable {
             //verificar colisao com naveInimiga/naveAliada
             for (int i = 0; i < qtosInimigos; i++) {
                 NaveInimiga nAtual = nInimigas[i];
-                
+                //System.out.println(i);
                 Sprite n = nAtual.getSprite();
                 Sprite aliada = naveAliada.getSprite();
                 

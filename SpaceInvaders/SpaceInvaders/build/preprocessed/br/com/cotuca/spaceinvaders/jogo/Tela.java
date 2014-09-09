@@ -45,7 +45,7 @@ public class Tela extends GameCanvas implements Runnable {
         super(true);
         altura = getHeight();
         largura = getWidth();
-
+        
         jogando = false;
         thread = new Thread(this);
         //Aumentar o tamanho Max
@@ -139,7 +139,11 @@ public class Tela extends GameCanvas implements Runnable {
 
             acoesDoTeclado(g);
             
+<<<<<<< HEAD
             inimigos.mover(altura,largura);
+=======
+            //inimigos.moverMatriz(this);
+>>>>>>> vgcapone
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
                 
@@ -171,7 +175,11 @@ public class Tela extends GameCanvas implements Runnable {
             //verificar colisao com naveInimiga/naveAliada
             for (int i = 0; i < qtosInimigos; i++) {
                 NaveInimiga nAtual = nInimigas[i];
+<<<<<<< HEAD
                 
+=======
+                //System.out.println(i);
+>>>>>>> vgcapone
                 Sprite n = nAtual.getSprite();
                 Sprite aliada = naveAliada.getSprite();
                 
