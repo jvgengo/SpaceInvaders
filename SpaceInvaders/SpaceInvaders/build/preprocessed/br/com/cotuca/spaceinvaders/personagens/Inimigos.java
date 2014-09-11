@@ -18,7 +18,7 @@ public class Inimigos {
 
     protected NaveInimiga[] inimigos;
 
-    protected int dir = Personagem.DIREITA;
+    protected int dir = Personagem.BAIXO;
     protected int colunas;
     protected int linhas;
     protected int x;

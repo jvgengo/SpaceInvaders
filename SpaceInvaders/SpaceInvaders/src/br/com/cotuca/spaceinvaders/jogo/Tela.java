@@ -37,7 +37,7 @@ public class Tela extends GameCanvas implements Runnable {
     private int qtosPers = 0;
     private int qtosTiros = 0;
     private int qtosInimigos = 0;
-    public static final int DELAY = 40;
+    public static final int DELAY = 60;
     //indice do LayerManger
     private int iLm = 0;
 
@@ -54,7 +54,7 @@ public class Tela extends GameCanvas implements Runnable {
         try {
             naveAliada = new NaveAliada(Imagens.NAVE_ALIADA, largura - 30, altura - 60);
             
-            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 8,1, 0, 0);
+            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 10,1, 0, 0);
             fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -104,7 +104,8 @@ public class Tela extends GameCanvas implements Runnable {
                     ex.printStackTrace();
                 }
 
-                lmng.insert(tiro.getTiro(), iLm);
+//                lmng.insert(tiro.getTiro(), iLm);
+                lmng.append(tiro.getTiro());
                 tiros[qtosTiros] = tiro;
                 qtosTiros++;
 
@@ -152,20 +153,17 @@ public class Tela extends GameCanvas implements Runnable {
                     //verifica colisao
                     
                     //erro na colisao se o tiro atingir mais de um inimigo ao mesmo tempo
-                    if (t.collidesWith(n, true)) {
+                    if (t.collidesWith(n, true) && nAtual.isVisivel()) {
 //                        removerInimigo(nAtual, j);
                         nAtual.setVisivel(false);
-                        lmng.remove(nAtual.getSprite());
+                        lmng.remove(n);
                         removerTiro(tAtual, i);
-                    } else {
-                        
-                    }
+                    } 
                     
                 }
                 
                 // verificar limite da tela, caso o tiro passe excluir esse tiro
                 int yTiro = tAtual.getTiro().getY();
-
                 if (yTiro >= 0) {
                     tAtual.mover(Personagem.CIMA);
                 } else {
@@ -176,11 +174,11 @@ public class Tela extends GameCanvas implements Runnable {
             //verificar colisao com naveInimiga/naveAliada
             for (int i = 0; i < qtosInimigos; i++) {
                 NaveInimiga nAtual = nInimigas[i];
-                //System.out.println(i);
+                
                 Sprite n = nAtual.getSprite();
                 Sprite aliada = naveAliada.getSprite();
                 
-                if (n.collidesWith(aliada, true)) {
+                if (n.collidesWith(aliada, true) && nAtual.isVisivel()) {
                     //acabou o jogo
                     pararJogo();
                 }

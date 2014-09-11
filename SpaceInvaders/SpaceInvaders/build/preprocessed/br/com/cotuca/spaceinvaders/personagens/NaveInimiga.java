@@ -36,7 +36,7 @@ public class NaveInimiga extends Nave{
         }
         if(direcao == Personagem.BAIXO){
             this.sprite.move(0, VELOCIDADE_BAIXO);
-            this.y += VELOCIDADE_BAIXO;
+            this.sprite.nextFrame();
             return true;
         }
         return false;

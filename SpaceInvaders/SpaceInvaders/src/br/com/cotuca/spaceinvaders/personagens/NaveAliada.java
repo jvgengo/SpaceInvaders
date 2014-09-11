@@ -20,7 +20,7 @@ public class NaveAliada extends Nave {
 
     public Tiro atirar() throws IOException {
         
-        Tiro tiro = new Tiro(Imagens.TIRO, getSprite().getX(), getSprite().getY() - this.imagem.getHeight() - 20);
+        Tiro tiro = new Tiro(Imagens.TIRO, getSprite().getX(), getSprite().getY() - this.imagem.getHeight() - 10);
         
         
         return tiro;
