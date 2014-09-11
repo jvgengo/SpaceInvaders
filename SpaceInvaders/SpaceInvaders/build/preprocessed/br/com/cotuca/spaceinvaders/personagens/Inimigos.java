@@ -61,6 +61,7 @@ public class Inimigos {
     public boolean moverMatriz(Tela tela) {
 
         int larguraDaTela = tela.getWidth();
+        int alturaDaTela = tela.getHeight();
 
         NaveInimiga naveMaisProximaDaDireita = null;
         NaveInimiga naveMaisProximaDaEsquerda = null;
@@ -94,24 +95,28 @@ public class Inimigos {
 
         boolean posicaoMenorQueLimeteDaEsquerda = naveMaisProximaDaEsquerda.getSprite().getX() > 0;
 
-        if (posicaoMenorQueLimiteDaDireita && posicaoMenorQueLimeteDaEsquerda) {
+        boolean posicaoMaiorQueLimeteDeBaixo = naveMaisProximaDaDireita.getSprite().getY() < alturaDaTela;
 
-            mover(direcao);
+        if (posicaoMaiorQueLimeteDeBaixo) {
+            if (posicaoMenorQueLimiteDaDireita && posicaoMenorQueLimeteDaEsquerda) {
 
-        } else if (!posicaoMenorQueLimiteDaDireita) {
+                mover(direcao);
 
-            direcao = Personagem.BAIXO;
-            mover(direcao);
+            } else if (!posicaoMenorQueLimiteDaDireita) {
 
-            direcao = Personagem.ESQUERDA;
-            mover(direcao);
+                direcao = Personagem.BAIXO;
+                mover(direcao);
 
-        } else if (!posicaoMenorQueLimeteDaEsquerda) {
-            direcao = Personagem.BAIXO;
-            mover(direcao);
+                direcao = Personagem.ESQUERDA;
+                mover(direcao);
 
-            direcao = Personagem.DIREITA;
-            mover(direcao);
+            } else if (!posicaoMenorQueLimeteDaEsquerda) {
+                direcao = Personagem.BAIXO;
+                mover(direcao);
+
+                direcao = Personagem.DIREITA;
+                mover(direcao);
+            }
         }
 
         return true;
