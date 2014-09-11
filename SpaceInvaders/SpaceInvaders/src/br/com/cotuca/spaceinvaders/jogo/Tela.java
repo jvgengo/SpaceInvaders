@@ -54,7 +54,7 @@ public class Tela extends GameCanvas implements Runnable {
         try {
             naveAliada = new NaveAliada(Imagens.NAVE_ALIADA, largura - 30, altura - 60);
             
-            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 7,4, 0, 0);
+            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 4,4, 0, 0);
             fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -96,7 +96,7 @@ public class Tela extends GameCanvas implements Runnable {
             Tiro tiro = null;
 
             //verificar o limite de tiros na tela
-            if (qtosTiros < 3) {
+            if (qtosTiros < 1) {
 
                 try {
                     tiro = naveAliada.atirar();

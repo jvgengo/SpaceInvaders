@@ -8,6 +8,7 @@ package br.com.cotuca.spaceinvaders.personagens;
 import br.com.cotuca.spaceinvaders.jogo.SpaceInvaders;
 import br.com.cotuca.spaceinvaders.jogo.Tela;
 import java.io.IOException;
+import javax.microedition.lcdui.game.Sprite;
 
 /**
  *
@@ -17,7 +18,7 @@ import java.io.IOException;
 public class Inimigos {
 
     protected NaveInimiga[][] inimigos;
-    protected int dir = Personagem.BAIXO;
+    protected int direcao = Personagem.DIREITA;
     protected int colunas;
     protected int linhas;
     protected int x;
@@ -59,15 +60,72 @@ public class Inimigos {
 
     public boolean moverMatriz(Tela tela) {
 
+        int larguraDaTela = tela.getWidth();
+
+        NaveInimiga naveMaisProximaDaDireita = null;
+        NaveInimiga naveMaisProximaDaEsquerda = null;
+
+        int maiorX = 0;
+        int menorX = larguraDaTela;
+
         for (int l = 0; l < linhas; l++) {
             for (int i = 0; i < colunas; i++) {
-                NaveInimiga n = inimigos[l][i];
-                n.mover(dir);
+                NaveInimiga naveAtual = inimigos[l][i];
+                Sprite spriteDaNaveAtual = naveAtual.getSprite();
+                int posicaoXDaNaveAtual = spriteDaNaveAtual.getX();
+                if (naveAtual.isVisivel()) {
+                    if (posicaoXDaNaveAtual > maiorX) {
+                        maiorX = posicaoXDaNaveAtual;
+                        naveMaisProximaDaDireita = naveAtual;
+                    }
+
+                    if (posicaoXDaNaveAtual < menorX) {
+                        menorX = posicaoXDaNaveAtual;
+                        naveMaisProximaDaEsquerda = naveAtual;
+
+                    }
+                }
+            }
+        }
+
+
+        boolean posicaoMenorQueLimiteDaDireita = naveMaisProximaDaDireita.getSprite().getX()
+                + naveMaisProximaDaDireita.getSprite().getWidth() < larguraDaTela;
+
+        boolean posicaoMenorQueLimeteDaEsquerda = naveMaisProximaDaEsquerda.getSprite().getX() > 0;
+
+        if (posicaoMenorQueLimiteDaDireita && posicaoMenorQueLimeteDaEsquerda) {
+
+            mover(direcao);
+
+        } else if (!posicaoMenorQueLimiteDaDireita) {
+
+            direcao = Personagem.BAIXO;
+            mover(direcao);
+
+            direcao = Personagem.ESQUERDA;
+            mover(direcao);
+
+        } else if (!posicaoMenorQueLimeteDaEsquerda) {
+            direcao = Personagem.BAIXO;
+            mover(direcao);
+
+            direcao = Personagem.DIREITA;
+            mover(direcao);
+        }
+
+        return true;
+    }
+
+    private void mover(int direcaoParaSerMovido) {
+        for (int l = 0; l < linhas; l++) {
+            for (int i = 0; i < colunas; i++) {
+
+                inimigos[l][i].mover(direcaoParaSerMovido);
 
             }
-            // inimigos[l][c].mover(direcao);
         }
-        return true;
+
     }
 
     public NaveInimiga[] getInimigos() {
