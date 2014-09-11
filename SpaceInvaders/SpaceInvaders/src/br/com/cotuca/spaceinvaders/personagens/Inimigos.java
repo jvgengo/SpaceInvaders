@@ -89,7 +89,8 @@ public class Inimigos {
             }
         }
 
-
+        
+        //Bug: Caso acha a morte da naveMaisProximaDaDireita antes de fazer a verificacao abaixo: ocorrera NullPointerException
         boolean posicaoMenorQueLimiteDaDireita = naveMaisProximaDaDireita.getSprite().getX()
                 + naveMaisProximaDaDireita.getSprite().getWidth() < larguraDaTela;
 
