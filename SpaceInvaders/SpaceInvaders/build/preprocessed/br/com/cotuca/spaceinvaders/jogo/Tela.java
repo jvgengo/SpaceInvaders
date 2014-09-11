@@ -54,7 +54,7 @@ public class Tela extends GameCanvas implements Runnable {
         try {
             naveAliada = new NaveAliada(Imagens.NAVE_ALIADA, largura - 30, altura - 60);
             
-            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 7,1, 0, 0);
+            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 7,4, 0, 0);
             fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -152,9 +152,7 @@ public class Tela extends GameCanvas implements Runnable {
                     
                     //verifica colisao
                     
-                    //erro na colisao se o tiro atingir mais de um inimigo ao mesmo tempo
                     if (t.collidesWith(n, true) && nAtual.isVisivel()) {
-//                        removerInimigo(nAtual, j);
                         nAtual.setVisivel(false);
                         lmng.remove(n);
                         removerTiro(tAtual, i);

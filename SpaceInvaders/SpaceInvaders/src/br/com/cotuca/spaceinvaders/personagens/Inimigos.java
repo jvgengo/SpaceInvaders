@@ -16,8 +16,7 @@ import java.io.IOException;
  */
 public class Inimigos {
 
-    protected NaveInimiga[] inimigos;
-
+    protected NaveInimiga[][] inimigos;
     protected int dir = Personagem.BAIXO;
     protected int colunas;
     protected int linhas;
@@ -25,28 +24,27 @@ public class Inimigos {
     protected int y;
 
     public Inimigos(String srcImagem, int colunas, int linhas, int x, int y) {
-        inimigos = new NaveInimiga[linhas * colunas];
+        inimigos = new NaveInimiga[linhas][colunas];
         this.colunas = colunas;
         this.linhas = linhas;
         this.x = x;
         this.y = y;
-        int step = 0;
-        for (int l = 0; l < linhas * colunas; l++) {
-            try {
-                //arrumar posicao dos inimigos que esta errado ainda
-                System.out.println("Instancia" + (l));
-                
-                //Capone o erro acho que esta na criacao das posicoes
-                //Teste com um cara apenas na 10 10 e ta funcionando normal
-                
-//                inimigos[l] = new NaveInimiga(srcImagem, ((l % colunas) * SpaceInvaders.lSprite) + x,
-//                        (l * SpaceInvaders.aSprite) + y);
-                inimigos[l] = new NaveInimiga(srcImagem,step + SpaceInvaders.lSprite, SpaceInvaders.aSprite);
-                step += 30;
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                break;
+        int stepParaLinha = 0;
+        int stepParaColuna = 0;
+
+        for (int indiceDaLinha = 0; indiceDaLinha < linhas; indiceDaLinha++) {
+            for (int indiceDaColuna = 0; indiceDaColuna < colunas; indiceDaColuna++) {
+                try {
+                    inimigos[indiceDaLinha][indiceDaColuna] = new NaveInimiga(srcImagem, stepParaColuna + SpaceInvaders.lSprite, stepParaLinha + SpaceInvaders.aSprite);
+                    stepParaColuna += 30;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    break;
+                }
+
             }
+            stepParaColuna = 0;
+            stepParaLinha += 30;
 
         }
     }
@@ -61,17 +59,28 @@ public class Inimigos {
 
     public boolean moverMatriz(Tela tela) {
 
-        for (int l = 0; l < linhas * colunas; l++) {
+        for (int l = 0; l < linhas; l++) {
+            for (int i = 0; i < colunas; i++) {
+                NaveInimiga n = inimigos[l][i];
+                n.mover(dir);
 
-            NaveInimiga n = inimigos[l];
-            n.mover(dir);
+            }
             // inimigos[l][c].mover(direcao);
         }
         return true;
     }
 
     public NaveInimiga[] getInimigos() {
-        return inimigos;
-    }
 
+        NaveInimiga[] retorno = new NaveInimiga[linhas * colunas];
+        int indiceDoRetorno = 0;
+        for (int l = 0; l < linhas; l++) {
+            for (int i = 0; i < colunas; i++) {
+                NaveInimiga n = inimigos[l][i];
+                retorno[indiceDoRetorno] = n;
+                indiceDoRetorno++;
+            }
+        }
+        return retorno;
+    }
 }
