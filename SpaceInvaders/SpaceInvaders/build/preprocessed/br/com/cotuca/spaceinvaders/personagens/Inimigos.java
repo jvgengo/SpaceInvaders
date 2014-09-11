@@ -41,8 +41,8 @@ public class Inimigos {
                 
 //                inimigos[l] = new NaveInimiga(srcImagem, ((l % colunas) * SpaceInvaders.lSprite) + x,
 //                        (l * SpaceInvaders.aSprite) + y);
-                inimigos[l] = new NaveInimiga(srcImagem,step + SpaceInvaders.lSprite , SpaceInvaders.aSprite);
-                step += 20;
+                inimigos[l] = new NaveInimiga(srcImagem,step + SpaceInvaders.lSprite, SpaceInvaders.aSprite);
+                step += 30;
             } catch (IOException ex) {
                 ex.printStackTrace();
                 break;
