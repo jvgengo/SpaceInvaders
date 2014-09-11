@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class NaveInimiga extends Nave{
 
-    protected static final int VELOCIDADE_BAIXO = 1;
+    protected static final int VELOCIDADE_BAIXO = 10;
     private boolean visivel;
     
     public NaveInimiga(String src,int x,int y) throws IOException {
