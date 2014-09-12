@@ -10,32 +10,38 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
-import javax.microedition.midlet.MIDlet;
+import javax.microedition.midlet.*;
 
 /**
- * @author u12176
+ * @author u12165
  */
-public class SpaceInvaders extends MIDlet implements CommandListener{
+public class TesteMenu extends MIDlet {
 
     private Display display;
     private Command cmdExit;
-    private Tela coreGame;
-    public static final int lSprite = 16;
-    public static final int aSprite = 8;
+    private Menu menu;
     
-    SpaceInvaders(){
+    public TesteMenu(){
         display = Display.getDisplay(this);
-        
-        coreGame = new Tela();
+        menu = new Menu();
         cmdExit = new Command("Sair", Command.EXIT, 0);
-        coreGame.addCommand(cmdExit);
-        coreGame.setCommandListener(this);
+        menu.addCommand(cmdExit);
+        menu.setCommandListener(new CommandListener() {
+
+            public void commandAction(Command c, Displayable d) {
+                if (c == cmdExit){
+                    System.gc();
+                    destroyApp(false);
+                    notifyDestroyed();
+                }
+            }
+        });
     }
     
     public void startApp() {
-        if (coreGame != null){
-            display.setCurrent(coreGame);
-            coreGame.inicarJogo();
+        if (menu != null){
+            display.setCurrent(menu);
+            menu.iniciar();
         }
     }
     
@@ -43,13 +49,5 @@ public class SpaceInvaders extends MIDlet implements CommandListener{
     }
     
     public void destroyApp(boolean unconditional) {
-    }
-
-    public void commandAction(Command c, Displayable d) {
-        if (c == null){
-            System.gc();
-            destroyApp(false);
-            notifyDestroyed();
-        }
     }
 }

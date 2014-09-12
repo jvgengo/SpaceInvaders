@@ -46,8 +46,8 @@ public class SpaceInvaders extends MIDlet implements CommandListener{
     }
 
     public void commandAction(Command c, Displayable d) {
-        if (c == cmdExit){
-            System.gc();
+        if (c == null){
+            System.gc   ();
             destroyApp(false);
             notifyDestroyed();
         }

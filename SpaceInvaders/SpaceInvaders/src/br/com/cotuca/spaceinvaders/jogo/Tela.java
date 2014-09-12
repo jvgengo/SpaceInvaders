@@ -75,7 +75,7 @@ public class Tela extends GameCanvas implements Runnable {
 
     }
 
-    private void acoesDoTeclado(Graphics g) {
+    private void acoesDoTeclado() {
 
         int teclaClicada = getKeyStates();
         int xNave = naveAliada.getSprite().getX();
@@ -134,7 +134,7 @@ public class Tela extends GameCanvas implements Runnable {
 
         while (jogando) {
 
-            acoesDoTeclado(g);
+            acoesDoTeclado();
             
             
             //Acho que nao eh no movimento que esta o erro
