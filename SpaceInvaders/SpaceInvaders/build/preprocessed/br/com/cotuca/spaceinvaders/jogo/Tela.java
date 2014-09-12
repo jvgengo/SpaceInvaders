@@ -40,6 +40,15 @@ public class Tela extends GameCanvas implements Runnable {
     public static final int DELAY = 60;
     //indice do LayerManger
     private int iLm = 0;
+    
+    private int posicaoYNaveAliada;
+    
+    public static final int MAX_TIROS = 100;
+    public static final int COLUNAS_INIMIGOS = 6;
+    public static final int LINHAS_INIMIGOS = 4;
+    public static final int DIVISOR_SPRITE_ALIADA = 2;
+    
+    
 
     public Tela() {
         super(true);
@@ -50,11 +59,11 @@ public class Tela extends GameCanvas implements Runnable {
         thread = new Thread(this);
         //Aumentar o tamanho Max
         personagens = new Personagem[20];
-        tiros = new Tiro[3];
+        tiros = new Tiro[MAX_TIROS];
         try {
-            naveAliada = new NaveAliada(Imagens.NAVE_ALIADA, largura - 30, altura - 60);
-            
-            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, 4,4, 0, 0);
+            naveAliada = new NaveAliada(Imagens.NAVE_ALIADA, largura - 30, altura - 60,DIVISOR_SPRITE_ALIADA);
+            posicaoYNaveAliada = naveAliada.getSprite().getY() - naveAliada.getSprite().getHeight();
+            inimigos = new Inimigos(Imagens.NAVE_INIMIGA, COLUNAS_INIMIGOS,LINHAS_INIMIGOS, 0, 0);
             fundo = Image.createImage(Imagens.FUNDO);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -73,6 +82,10 @@ public class Tela extends GameCanvas implements Runnable {
             lmng.insert(nInimigas[i].getSprite(), iLm);
         }
 
+    }
+
+    public int getPosicaoYNaveAliada() {
+        return posicaoYNaveAliada;
     }
 
     private void acoesDoTeclado(Graphics g) {
@@ -96,7 +109,7 @@ public class Tela extends GameCanvas implements Runnable {
             Tiro tiro = null;
 
             //verificar o limite de tiros na tela
-            if (qtosTiros < 1) {
+            if (qtosTiros < MAX_TIROS) {
 
                 try {
                     tiro = naveAliada.atirar();
@@ -137,9 +150,16 @@ public class Tela extends GameCanvas implements Runnable {
 
             acoesDoTeclado(g);
             
+            if (qtosInimigos == 0) {
+                //ganhou
+                pararJogo();
+            }
             
             //Acho que nao eh no movimento que esta o erro
-            inimigos.moverMatriz(this);
+            boolean naoAcabouJogo = inimigos.moverMatriz(this);
+            if (!naoAcabouJogo) {
+                pararJogo();
+            }
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
                 
@@ -154,6 +174,7 @@ public class Tela extends GameCanvas implements Runnable {
                     
                     if (t.collidesWith(n, true) && nAtual.isVisivel()) {
                         nAtual.setVisivel(false);
+                        qtosInimigos--;
                         lmng.remove(n);
                         removerTiro(tAtual, i);
                     } 

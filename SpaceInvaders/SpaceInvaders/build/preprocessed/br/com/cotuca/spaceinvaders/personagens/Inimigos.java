@@ -69,12 +69,13 @@ public class Inimigos {
         int maiorX = 0;
         int menorX = larguraDaTela;
 
+        boolean posicaoMenorQueLimeteDeBaixo = true;
+        
         for (int l = 0; l < linhas; l++) {
             for (int i = 0; i < colunas; i++) {
                 NaveInimiga naveAtual = inimigos[l][i];
                 Sprite spriteDaNaveAtual = naveAtual.getSprite();
                 int posicaoXDaNaveAtual = spriteDaNaveAtual.getX();
-                if (naveAtual.isVisivel()) {
                     if (posicaoXDaNaveAtual > maiorX) {
                         maiorX = posicaoXDaNaveAtual;
                         naveMaisProximaDaDireita = naveAtual;
@@ -83,22 +84,24 @@ public class Inimigos {
                     if (posicaoXDaNaveAtual < menorX) {
                         menorX = posicaoXDaNaveAtual;
                         naveMaisProximaDaEsquerda = naveAtual;
-
+                    }
+                    
+                    if (spriteDaNaveAtual.getY() > tela.getPosicaoYNaveAliada() && naveAtual.isVisivel()) {
+                        posicaoMenorQueLimeteDeBaixo = false;
                     }
                 }
-            }
         }
 
-
+        
+        //Bug: Caso acha a morte da naveMaisProximaDaDireita antes de fazer a verificacao abaixo: ocorrera NullPointerException
         boolean posicaoMenorQueLimiteDaDireita = naveMaisProximaDaDireita.getSprite().getX()
                 + naveMaisProximaDaDireita.getSprite().getWidth() < larguraDaTela;
 
-        boolean posicaoMenorQueLimeteDaEsquerda = naveMaisProximaDaEsquerda.getSprite().getX() > 0;
+        boolean posicaoMenorQueLimiteDaEsquerda = naveMaisProximaDaEsquerda.getSprite().getX() > 0;
 
-        boolean posicaoMaiorQueLimeteDeBaixo = naveMaisProximaDaDireita.getSprite().getY() < alturaDaTela;
 
-        if (posicaoMaiorQueLimeteDeBaixo) {
-            if (posicaoMenorQueLimiteDaDireita && posicaoMenorQueLimeteDaEsquerda) {
+        if (posicaoMenorQueLimeteDeBaixo) {
+            if (posicaoMenorQueLimiteDaDireita && posicaoMenorQueLimiteDaEsquerda) {
 
                 mover(direcao);
 
@@ -110,13 +113,15 @@ public class Inimigos {
                 direcao = Personagem.ESQUERDA;
                 mover(direcao);
 
-            } else if (!posicaoMenorQueLimeteDaEsquerda) {
+            } else if (!posicaoMenorQueLimiteDaEsquerda) {
                 direcao = Personagem.BAIXO;
                 mover(direcao);
 
                 direcao = Personagem.DIREITA;
                 mover(direcao);
             }
+        } else {
+            return false;
         }
 
         return true;
