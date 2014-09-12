@@ -10,23 +10,26 @@ import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
+import javax.microedition.lcdui.game.LayerManager;
 
 /**
  *
  * @author u12165
  */
-public class Menu extends GameCanvas implements Runnable{
+public class Menu extends GameCanvas implements Runnable {
 
     private final String[] opcoes = {"Jogar", "Instrucoes", "Sair"};
     private final int JOGAR = 0;
     private final int INSTRUCOES = 1;
     private final int SAIR = 2;
+    private final int DELAY = 40;
     private Image fundo;
     private int numOpcoes, altura, largura;
     private Thread thread;
     private boolean saiMenu;
     private int indiceOpcao;
     private Tela telaJogo;
+    private LayerManager lm;
 
     public Menu() {
         super(true);
@@ -34,7 +37,8 @@ public class Menu extends GameCanvas implements Runnable{
         numOpcoes = opcoes.length;
         altura = getHeight();
         largura = getWidth();
-        
+
+        lm = new LayerManager();
         saiMenu = false;
         thread = new Thread(this);
         try {
@@ -42,59 +46,65 @@ public class Menu extends GameCanvas implements Runnable{
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
+
     }
 
     public void acoesTeclado() {
         int tecla = getKeyStates();
         //tecla para baixo
-        if (tecla == GameCanvas.DOWN_PRESSED && indiceOpcao > 0) {
+        if (tecla == GameCanvas.DOWN_PRESSED && indiceOpcao < numOpcoes - 1) {
             indiceOpcao++;
         }
         //tecla para cima
-        if (tecla == GameCanvas.UP_PRESSED && indiceOpcao < numOpcoes) {
+        if (tecla == GameCanvas.UP_PRESSED && indiceOpcao > 0) {
             indiceOpcao--;
         }
-        
-        if (tecla == GameCanvas.FIRE_PRESSED){
+
+        if (tecla == GameCanvas.FIRE_PRESSED) {
             saiMenu = true;
-            if (indiceOpcao == this.JOGAR){
+            if (indiceOpcao == this.JOGAR) {
                 telaJogo = new Tela();
             }
-            
+
+        }
+        try {
+            Thread.sleep(DELAY*5);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
     }
-    
-    
-    public void iniciar(){
+
+    public void iniciar() {
         thread.start();
     }
 
     private void desenhar(Graphics g) {
         g.drawImage(fundo, 0, 0, 0);
-        g.setColor(255,255,255);
-        for (int i = 0; i < numOpcoes; i++){
-            g.drawString(opcoes[i], 
-                         largura/2-opcoes[i].length(), 
-                         altura/2+i*20,
-                         0);
+        g.setColor(255, 255, 255);
+        for (int i = 0; i < numOpcoes; i++) {
+            g.drawString(opcoes[i],
+                    largura / 2 - opcoes[i].length(),
+                    altura / 2 + i * 20,
+                    0);
         }
         //opcaoSelecionada
-        g.setColor(0,255,0);
-        g.drawString(opcoes[indiceOpcao], 
-                     largura/2-opcoes[indiceOpcao].length(), 
-                     altura/2+indiceOpcao*20,
-                     0);
-        
+        g.setColor(0, 255, 0);
+        g.drawString(opcoes[indiceOpcao],
+                largura / 2 - opcoes[indiceOpcao].length(),
+                altura / 2 + indiceOpcao * 20,
+                0);
+
+        lm.paint(g, 0, 0);
         flushGraphics();
     }
 
     public void run() {
         Graphics g = getGraphics();
-        while (saiMenu){
+        while (!saiMenu) {
             acoesTeclado();
             desenhar(g);
         }
+
     }
 
 }

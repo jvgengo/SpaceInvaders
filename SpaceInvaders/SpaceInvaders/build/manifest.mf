@@ -1,4 +1,3 @@
-MIDlet-2: TesteMenu, , br.com.cotuca.spaceinvaders.jogo.TesteMenu
 MIDlet-1: SpaceInvaders, , br.com.cotuca.spaceinvaders.jogo.SpaceInvaders
 MIDlet-Vendor: Vendor
 MIDlet-Name: SpaceInvaders
