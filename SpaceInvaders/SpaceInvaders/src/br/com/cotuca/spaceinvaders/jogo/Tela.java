@@ -40,13 +40,14 @@ public class Tela extends GameCanvas implements Runnable {
     public static final int DELAY = 60;
     //indice do LayerManger
     private int iLm = 0;
-    
+    private int auxQtosInimigos;
     private int posicaoYNaveAliada;
     
     public static final int MAX_TIROS = 100;
     public static final int COLUNAS_INIMIGOS = 6;
     public static final int LINHAS_INIMIGOS = 4;
     public static final int DIVISOR_SPRITE_ALIADA = 2;
+    
     
     
 
@@ -76,6 +77,7 @@ public class Tela extends GameCanvas implements Runnable {
         //preciso add cada nave no lmng
         nInimigas = inimigos.getInimigos();
         qtosInimigos = nInimigas.length;
+        auxQtosInimigos = qtosInimigos;
 
         for (int i = 0; i < qtosInimigos; i++) {
             iLm += 1;
@@ -150,7 +152,7 @@ public class Tela extends GameCanvas implements Runnable {
 
             acoesDoTeclado(g);
             
-            if (qtosInimigos == 0) {
+            if (auxQtosInimigos == 0) {
                 //ganhou
                 pararJogo();
             }
@@ -174,6 +176,7 @@ public class Tela extends GameCanvas implements Runnable {
                     
                     if (t.collidesWith(n, true) && nAtual.isVisivel()) {
                         nAtual.setVisivel(false);
+                        auxQtosInimigos--;
                         lmng.remove(n);
                         removerTiro(tAtual, i);
                     } 
