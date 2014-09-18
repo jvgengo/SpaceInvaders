@@ -47,12 +47,14 @@ public class Tela extends GameCanvas implements Runnable {
     public static final int COLUNAS_INIMIGOS = 6;
     public static final int LINHAS_INIMIGOS = 4;
     public static final int DIVISOR_SPRITE_ALIADA = 2;
+    private Menu menu;
     
     
     
 
-    public Tela() {
+    public Tela(Menu m) {
         super(true);
+        menu = m;
         altura = getHeight();
         largura = getWidth();
         
@@ -155,12 +157,15 @@ public class Tela extends GameCanvas implements Runnable {
             if (auxQtosInimigos == 0) {
                 //ganhou
                 pararJogo();
+                menu.voltaMenu();
             }
             
             //Acho que nao eh no movimento que esta o erro
             boolean naoAcabouJogo = inimigos.moverMatriz(this);
+            
             if (!naoAcabouJogo) {
                 pararJogo();
+                menu.voltaMenu();
             }
             for (int i = 0; i < qtosTiros; i++) {
                 Tiro tAtual = tiros[i];
@@ -202,6 +207,7 @@ public class Tela extends GameCanvas implements Runnable {
                 if (n.collidesWith(aliada, true) && nAtual.isVisivel()) {
                     //acabou o jogo
                     pararJogo();
+                    menu.voltaMenu();
                 }
             }
             

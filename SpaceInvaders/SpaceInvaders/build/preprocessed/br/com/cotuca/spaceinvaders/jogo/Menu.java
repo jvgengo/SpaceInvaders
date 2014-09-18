@@ -68,7 +68,7 @@ public class Menu extends GameCanvas implements Runnable {
         if (tecla == GameCanvas.FIRE_PRESSED) {
             saiMenu = true;
             if (indiceOpcao == this.JOGAR) {
-                telaJogo = new Tela();
+                telaJogo = new Tela(this);
                 display.setCurrent(telaJogo);
                 telaJogo.inicarJogo();
                 
@@ -83,6 +83,7 @@ public class Menu extends GameCanvas implements Runnable {
     }
 
     public void iniciar() {
+        saiMenu = false;
         thread.start();
     }
 
@@ -104,6 +105,12 @@ public class Menu extends GameCanvas implements Runnable {
 
         lm.paint(g, 0, 0);
         flushGraphics();
+    }
+    
+    public void voltaMenu(){
+        display.setCurrent(this);
+        thread = new Thread(this);
+        iniciar();
     }
 
     public void run() {
