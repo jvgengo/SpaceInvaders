@@ -157,10 +157,12 @@ public class Tela extends GameCanvas implements Runnable {
             if (auxQtosInimigos == 0) {
                 //ganhou
                 pararJogo();
+                menu.voltaMenu();
             }
             
             //Acho que nao eh no movimento que esta o erro
             boolean naoAcabouJogo = inimigos.moverMatriz(this);
+            
             if (!naoAcabouJogo) {
                 pararJogo();
                 menu.voltaMenu();

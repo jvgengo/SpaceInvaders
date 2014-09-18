@@ -8,6 +8,7 @@ package br.com.cotuca.spaceinvaders.jogo;
 import br.com.cotuca.spaceinvaders.Recursos.Imagens;
 import java.io.IOException;
 import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
@@ -19,13 +20,13 @@ import javax.microedition.lcdui.game.LayerManager;
  */
 public class Menu extends GameCanvas implements Runnable {
 
-    private final String[] opcoes = {"Jogar", "Instrucoes", "Sair"};
+    private final String[] opcoes = {"Jogar","Sair"};
     private GameCanvas[] telas;
     private final int JOGAR = 0;
-    private final int INSTRUCOES = 1;
-    private final int SAIR = 2;
+    private final int SAIR = 1;
     private final int DELAY = 40;
     private Image fundo;
+    private Image logo;
     private int numOpcoes, altura, largura;
     private Thread thread;
     private boolean saiMenu;
@@ -48,6 +49,7 @@ public class Menu extends GameCanvas implements Runnable {
         thread = new Thread(this);
         try {
             fundo = Image.createImage(Imagens.FUNDO);
+            logo = Image.createImage(Imagens.LOGO);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -89,6 +91,7 @@ public class Menu extends GameCanvas implements Runnable {
 
     private void desenhar(Graphics g) {
         g.drawImage(fundo, 0, 0, 0);
+        g.drawImage(logo,20, 20, 0);
         g.setColor(255, 255, 255);
         for (int i = 0; i < numOpcoes; i++) {
             g.drawString(opcoes[i],
@@ -97,10 +100,10 @@ public class Menu extends GameCanvas implements Runnable {
                     0);
         }
         //opcaoSelecionada
-        g.setColor(0, 255, 0);
+        g.setColor(255,0, 0);
         g.drawString(opcoes[indiceOpcao],
                 largura / 2 - opcoes[indiceOpcao].length()*3,
-                altura / 2 + indiceOpcao * 20,
+                altura / 2 + indiceOpcao *20,
                 0);
 
         lm.paint(g, 0, 0);
