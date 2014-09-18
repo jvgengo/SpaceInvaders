@@ -86,11 +86,15 @@ public class Tela extends GameCanvas implements Runnable {
 
     }
 
+<<<<<<< HEAD
     public int getPosicaoYNaveAliada() {
         return posicaoYNaveAliada;
     }
 
     private void acoesDoTeclado(Graphics g) {
+=======
+    private void acoesDoTeclado() {
+>>>>>>> a688f2d2b22fa5a4e60c3ec8dc47cf5cd796ba3c
 
         int teclaClicada = getKeyStates();
         int xNave = naveAliada.getSprite().getX();
@@ -149,8 +153,7 @@ public class Tela extends GameCanvas implements Runnable {
         Graphics g = getGraphics();
 
         while (jogando) {
-
-            acoesDoTeclado(g);
+            acoesDoTeclado();
             
             if (auxQtosInimigos == 0) {
                 //ganhou

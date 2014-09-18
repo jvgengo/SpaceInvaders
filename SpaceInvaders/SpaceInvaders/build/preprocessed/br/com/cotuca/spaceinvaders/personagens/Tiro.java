@@ -15,7 +15,7 @@ import javax.microedition.lcdui.game.Sprite;
 public class Tiro extends Personagem {
 
     private Sprite tiro;
-    public static final int VELOCIADADE = 10;
+    public static final int VELOCIDADE = 10;
     
     
     public Tiro(String src,int x,int y) throws IOException {
@@ -26,7 +26,7 @@ public class Tiro extends Personagem {
 
     public boolean mover(int direcao) {
         if(direcao == Personagem.CIMA){
-            tiro.move(0, -VELOCIADADE);
+            tiro.move(0, -VELOCIDADE);
             tiro.nextFrame();
             return true;
         }
