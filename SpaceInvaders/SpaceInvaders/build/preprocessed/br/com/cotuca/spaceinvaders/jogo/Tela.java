@@ -133,7 +133,7 @@ public class Tela extends GameCanvas implements Runnable {
         Graphics g = getGraphics();
 
         while (jogando) {
-
+            System.out.println("ASDASD");
             acoesDoTeclado();
             
             

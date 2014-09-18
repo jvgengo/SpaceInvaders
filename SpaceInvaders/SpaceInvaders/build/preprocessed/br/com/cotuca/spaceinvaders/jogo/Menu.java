@@ -7,6 +7,7 @@ package br.com.cotuca.spaceinvaders.jogo;
 
 import br.com.cotuca.spaceinvaders.Recursos.Imagens;
 import java.io.IOException;
+import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
@@ -19,6 +20,7 @@ import javax.microedition.lcdui.game.LayerManager;
 public class Menu extends GameCanvas implements Runnable {
 
     private final String[] opcoes = {"Jogar", "Instrucoes", "Sair"};
+    private GameCanvas[] telas;
     private final int JOGAR = 0;
     private final int INSTRUCOES = 1;
     private final int SAIR = 2;
@@ -30,13 +32,16 @@ public class Menu extends GameCanvas implements Runnable {
     private int indiceOpcao;
     private Tela telaJogo;
     private LayerManager lm;
+    private Display display;
 
-    public Menu() {
+    public Menu(Display d) {
         super(true);
+        this.display = d;
         indiceOpcao = 0;
         numOpcoes = opcoes.length;
         altura = getHeight();
         largura = getWidth();
+        telas = new GameCanvas[2];//instruções e tela do jogo
 
         lm = new LayerManager();
         saiMenu = false;
@@ -64,11 +69,14 @@ public class Menu extends GameCanvas implements Runnable {
             saiMenu = true;
             if (indiceOpcao == this.JOGAR) {
                 telaJogo = new Tela();
+                display.setCurrent(telaJogo);
+                telaJogo.inicarJogo();
+                
             }
 
         }
         try {
-            Thread.sleep(DELAY*5);
+            Thread.sleep(DELAY*2);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -83,14 +91,14 @@ public class Menu extends GameCanvas implements Runnable {
         g.setColor(255, 255, 255);
         for (int i = 0; i < numOpcoes; i++) {
             g.drawString(opcoes[i],
-                    largura / 2 - opcoes[i].length(),
+                    largura / 2 - opcoes[i].length()*3,
                     altura / 2 + i * 20,
                     0);
         }
         //opcaoSelecionada
         g.setColor(0, 255, 0);
         g.drawString(opcoes[indiceOpcao],
-                largura / 2 - opcoes[indiceOpcao].length(),
+                largura / 2 - opcoes[indiceOpcao].length()*3,
                 altura / 2 + indiceOpcao * 20,
                 0);
 
@@ -104,11 +112,7 @@ public class Menu extends GameCanvas implements Runnable {
             acoesTeclado();
             desenhar(g);
         }
-        try {
-            Thread.sleep(DELAY);
-        } catch (InterruptedException ex) {
-            System.err.println("Erro no delay da thread");
-        }
+
     }
 
 }

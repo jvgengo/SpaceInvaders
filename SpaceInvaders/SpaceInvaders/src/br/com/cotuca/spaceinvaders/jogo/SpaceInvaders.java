@@ -26,7 +26,7 @@ public class SpaceInvaders extends MIDlet implements CommandListener{
     SpaceInvaders(){
         display = Display.getDisplay(this);
         
-        coreGame = new Menu();
+        coreGame = new Menu(this.display);
         cmdExit = new Command("Sair", Command.EXIT, 0);
         coreGame.addCommand(cmdExit);
         coreGame.setCommandListener(this);
@@ -35,7 +35,7 @@ public class SpaceInvaders extends MIDlet implements CommandListener{
     public void startApp() {
         if (coreGame != null){
             display.setCurrent(coreGame);
-            coreGame.iniciar();
+             coreGame.iniciar();
         }
     }
     
@@ -46,7 +46,7 @@ public class SpaceInvaders extends MIDlet implements CommandListener{
     }
 
     public void commandAction(Command c, Displayable d) {
-        if (c == null){
+        if (c == cmdExit){
             System.gc();
             destroyApp(false);
             notifyDestroyed();
