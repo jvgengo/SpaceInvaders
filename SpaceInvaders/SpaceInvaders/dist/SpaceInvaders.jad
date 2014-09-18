@@ -1,9 +1,5 @@
 MIDlet-1: SpaceInvaders, , br.com.cotuca.spaceinvaders.jogo.SpaceInvaders
-<<<<<<< HEAD
-MIDlet-Jar-Size: 126010
-=======
-MIDlet-Jar-Size: 126725
->>>>>>> a688f2d2b22fa5a4e60c3ec8dc47cf5cd796ba3c
+MIDlet-Jar-Size: 128067
 MIDlet-Jar-URL: SpaceInvaders.jar
 MIDlet-Name: SpaceInvaders
 MIDlet-Vendor: Vendor

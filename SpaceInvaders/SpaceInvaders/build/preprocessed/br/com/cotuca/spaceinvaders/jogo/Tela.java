@@ -43,7 +43,7 @@ public class Tela extends GameCanvas implements Runnable {
     private int auxQtosInimigos;
     private int posicaoYNaveAliada;
     
-    public static final int MAX_TIROS = 100;
+    public static final int MAX_TIROS = 1;
     public static final int COLUNAS_INIMIGOS = 6;
     public static final int LINHAS_INIMIGOS = 4;
     public static final int DIVISOR_SPRITE_ALIADA = 2;
@@ -86,16 +86,13 @@ public class Tela extends GameCanvas implements Runnable {
 
     }
 
-<<<<<<< HEAD
+
     public int getPosicaoYNaveAliada() {
         return posicaoYNaveAliada;
     }
 
-    private void acoesDoTeclado(Graphics g) {
-=======
-    private void acoesDoTeclado() {
->>>>>>> a688f2d2b22fa5a4e60c3ec8dc47cf5cd796ba3c
 
+    private void acoesDoTeclado() {
         int teclaClicada = getKeyStates();
         int xNave = naveAliada.getSprite().getX();
 
@@ -153,7 +150,6 @@ public class Tela extends GameCanvas implements Runnable {
         Graphics g = getGraphics();
 
         while (jogando) {
-            System.out.println("ASDASD");
             acoesDoTeclado();
             
             if (auxQtosInimigos == 0) {
